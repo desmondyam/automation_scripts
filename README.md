@@ -1,6 +1,6 @@
-These scripts are used to help automate tasks tasks for troubleshooting computers.
+These scripts are used to help automate tasks tasks for troubleshooting computers. Use .bat to execute scripts. Use .txt for copying and pasting scripts into RMM or paste into elevated terminal.
 
-1. CheckFiles is used to verify which files are in the Documents, Downloads, Desktop and Pictures folders for all local users.
+1. CheckFiles.ps1 is used to verify which files are in the Documents, Downloads, Desktop and Pictures folders for all local users.
 
 2. MoveFilesWithPermissions is used for moving files into a single consolidated folder and updating all the permissions to be uploaded for data retention.
 

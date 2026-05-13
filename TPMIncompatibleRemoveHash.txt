@@ -1,0 +1,20 @@
+$regkey = "HKLM:\SYSTEM\CurrentControlSet\Control\Cryptography\Configuration\Local\SSL\00010003"
+$valuename = "Functions"
+$key = Get-Item -Path $regkey -ErrorAction SilentlyContinue
+$currentvalues = Get-ItemProperty -Path $regkey -Name $valuename | Select-Object -ExpandProperty $valuename
+$removevalues = @(
+    "RSAE-PSS/SHA256",
+    "RSAE-PSS/SHA384",
+    "RSAE-PSS/SHA512"
+    )
+$newvalues = $currentvalues | Where-Object {$_ -notin $removevalues }
+$deletevalues = Set-ItemProperty -Path $regkey -Name $valuename -Value $newvalues
+if ($key -and $key.Property -contains $valuename){
+    Write-Output "The registry value '$valuename' Exists, deleting problematic data values"
+    $deletevalues
+    Write-Output "Restarting computer"
+    shutdown /r /t 0
+    }
+    else{
+    Write-Output "The registry value '$valuename' doesn't exist"
+    }
